@@ -10,6 +10,8 @@ class Menu(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='updated')
     is_published = models.BooleanField(default=True, verbose_name='published')  # Default = none
 
+    def __str__(self):
+        return self.name
 
 
 

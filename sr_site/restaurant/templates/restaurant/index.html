@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}:</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    {% for item in menu %}
+        <div>
+            <p>{{ item.name }}</p>
+            <p>{{ item.description }}</p>
+            <p>{{ item.price }}</p>
+            <p>{{ item.updated_at|date:"d-M-Y" }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>
