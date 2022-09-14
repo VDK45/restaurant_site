@@ -9,6 +9,7 @@ class Menu(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Ngay doi')
     is_published = models.BooleanField(default=True, verbose_name='Hien/Dau')  # Default = none
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Loai menu')
 
     def __str__(self):
         return self.name
@@ -21,7 +22,18 @@ class Menu(models.Model):
         ordering = ['-price']    # Влияет на админку и на сайт
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=255, db_index=True, verbose_name='Category')  # Index field
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='created')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Ngay doi')
 
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Loai menu'
+        verbose_name_plural = 'All loai menu'
+        ordering = ['-title']
 
 
 
