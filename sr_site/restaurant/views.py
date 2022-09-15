@@ -8,8 +8,8 @@ def index(request):
     menu = Menu.objects.all()  #
     # menu = Menu.objects.order_by('-created_at')  # Sort by new if not sorty in Meta
     context = {
-        'menu': menu,  # for item in menu (index.html)
-        'title': 'All menu'
+        'title': 'All menu',  # tittle (index.html)
+        'menu': menu,  # body (index.html)
     }
     return render(request, template_name='restaurant/index.html', context=context)
 
