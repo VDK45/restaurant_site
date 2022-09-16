@@ -61,12 +61,14 @@
         <div class="card mb-3">
             <div class="card-header">{{ item.category.title }}</div>
             <div class="card-body">
-                <h5 class="card-title">{{ item.name }}</h5>
+                <h4 class="card-title">{{ item.name }}</h4>
+                {% autoescape off %}  <!--    Star Tag Экранирование -->
                 <p class="card-text">{{ item.description }}</p>
-                <p class="card-text">Gia: {{ item.price }} Dong</p>
+                <p class="card-text"><h5>Gia: {{ item.price }} Dong</h5></p>
+                {% endautoescape %}    <!--  End Tag Экранирование -->
                 <a href="#" class="btn btn-primary">Order</a>
             </div>
-            <div class="card-footer text-muted">Tu {{ item.updated_at|date:"d-M-Y" }}</div>
+            <div class="card-footer text-muted">Tu {{ item.updated_at|date:"d-M-Y" }}</div> <!--      Filter       -->
         </div>
         {% endfor %}
     </div>
