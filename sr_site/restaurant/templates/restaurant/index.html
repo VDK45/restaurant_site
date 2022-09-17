@@ -57,18 +57,18 @@
 <div class="container mt-3">
     <h1>{{ title }}</h1>
     <div class="row">
-        {% for item in menu %}
+        {% for item_m in menu %}
         <div class="card mb-3">
-            <div class="card-header">{{ item.category.title }}</div>
+            <div class="card-header">{{ item_m.category.title }}</div>
             <div class="card-body">
-                <h4 class="card-title">{{ item.name }}</h4>
+                <h4 class="card-title {% cycle 'text-danger' 'text-success' %}">{{ item_m.name }}</h4>
                 {% autoescape off %}  <!--    Star Tag Экранирование -->
-                <p class="card-text">{{ item.description }}</p>
-                <p class="card-text"><h5>Gia: {{ item.price }} Dong</h5></p>
+                <p class="card-text">{{ item_m.description }}</p>
+                <p class="card-text"><h5>Gia: {{ item_m.price }} Dong</h5></p>
                 {% endautoescape %}    <!--  End Tag Экранирование -->
                 <a href="#" class="btn btn-primary">Order</a>
             </div>
-            <div class="card-footer text-muted">Tu {{ item.updated_at|date:"d-M-Y" }}</div> <!--      Filter       -->
+            <div class="card-footer text-muted">Tu {{ item_m.updated_at|date:"d-M-Y" }}</div> <!--      Filter       -->
         </div>
         {% endfor %}
     </div>
