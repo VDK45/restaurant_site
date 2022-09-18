@@ -27,8 +27,8 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Ngay doi')
 
-    # def __str__(self):  # {{ item.category }} Иначе {{ item.category.title }}
-    #     return self.title
+    def __str__(self):  # {{ item.category }} Иначе {{ item.category.title }}
+        return self.title
 
     class Meta:
         verbose_name = 'Loai menu'
