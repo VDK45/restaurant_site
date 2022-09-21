@@ -9,7 +9,7 @@ def index(request):
     categories = Category.objects.all()
     # menu = Menu.objects.order_by('-created_at')  # Sort by new if not sorty in Meta
     context = {
-        'title': 'Tat ca menu',  # tittle (index.html)
+        'title': 'Menu',  # tittle (index.html)
         'menu': menu,  # body (index.html)
         'categories': categories
     }
@@ -20,4 +20,5 @@ def get_category(request, category_id):
     menu = Menu.objects.filter(category_id=category_id)
     categories = Category.objects.all()
     category = Category.objects.get(pk=category_id)
-    return render(request, 'restaurant/category.html', {'menu': menu, 'categories': categories, 'category': category, 'title': 'Menu'})
+    return render(request, 'restaurant/category.html',
+                  {'menu': menu, 'categories': categories, 'category': category, 'title': 'Menu'})
