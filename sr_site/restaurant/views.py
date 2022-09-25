@@ -21,3 +21,9 @@ def get_category(request, category_id):
     category = Category.objects.get(pk=category_id)
     return render(request, 'restaurant/category.html',
                   {'menu': menu, 'category': category, 'title': 'Menu'})
+
+
+def get_game(request, game_id):
+    game = Games.objects.filter(pk=game_id)
+    return render(request, 'restaurant/game.html', {'name': game, 'title': game_id})
+

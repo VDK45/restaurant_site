@@ -11,6 +11,12 @@ def get_categories():
 
 
 @register.inclusion_tag('restaurant/list_categories.html')
-def show_categories(arg1='Hello ', arg2='world!'):
+def show_categories(arg1, arg2):
     categories = Category.objects.all()
     return {"categories": categories, 'arg1': arg1, 'arg2': arg2}
+
+
+@register.inclusion_tag('restaurant/list_games.html')
+def show_games(arg1):
+    games = Games.objects.all()
+    return {"games": games, 'arg1': arg1}

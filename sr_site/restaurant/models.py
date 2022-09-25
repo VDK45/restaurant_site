@@ -37,7 +37,7 @@ class Category(models.Model):
 
 
 class Games(models.Model):
-    name = models.CharField(max_length=255, db_index=True, verbose_name='Category')  # Index field
+    name = models.CharField(max_length=255, db_index=True, verbose_name='game_name')  # Index field
     about_game = models.TextField(blank=True, verbose_name='about_game')  # Description / Не обязательное
     photo = models.ImageField(blank=True, upload_to='photos/%y/%m/%d', verbose_name='game image')  # Photo
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created')
@@ -49,5 +49,5 @@ class Games(models.Model):
     class Meta:
         verbose_name = 'Game'
         verbose_name_plural = 'Games'
-        ordering = ['-name']  # Sort by -name
+        ordering = ['name']  # Sort by -name
 

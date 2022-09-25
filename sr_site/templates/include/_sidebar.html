@@ -1,13 +1,20 @@
 {% load my_tags %}
 
-
+{% comment %}
 <div class="list-group">
     {% get_list_cat as categories %}
     {% for item_c in categories %}
     <a href="{% url 'category' item_c.pk %}" class="list-group-item list-group-item-action">{{ item_c.title }}</a>
     {% endfor %}
 </div>
+<br>
+{% endcomment %}
+<br>
+
+
+ {%  show_categories arg1='Menu  ' arg2='do an:' %} {# Передача данных в тэг restaurant.list_categories #}
 
 <br>
 
-{%  show_categories arg1='Second  ' arg2='menu:' %}
+{%  show_games arg1='Games:' %}
+
