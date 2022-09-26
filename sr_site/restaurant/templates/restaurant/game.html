@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Game {{ title }}</title>
-</head>
-<body>
-        GAME {{ title }}
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+{{ category.title }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'include/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+    <div class="card-header">
+        Game: {{ game }}
+    </div>
+        <div class="card-body">
+            {% if game.photo %}
+            <img src="{{ game.photo.url }}" alt="" width="320" class="mr-3">
+            {% else %}
+            <img src="https://api.lorem.space/image/movie?w=150&h=220" alt="" class="mr-3">   <!-- ##### -->
+            {% endif %}
+            <div class="media">
+                <div class="media-body">
+                    <h5 class="card-title">{{ game.name }}</h5>
+                    <p class="card-text">{{ game.about_game }}</p>
+                    <a href="#" class="btn btn-primary">Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
