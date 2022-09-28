@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse  # or reverse_lazy
 
 
 class Menu(models.Model):
@@ -30,6 +31,9 @@ class Category(models.Model):
     def __str__(self):  # {{ item.category }} Иначе {{ item.category.title }}
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'category_id': self.pk})
+
     class Meta:
         verbose_name = 'Loai menu'
         verbose_name_plural = 'All loai menu'
@@ -45,6 +49,9 @@ class Games(models.Model):
 
     def __str__(self):  # {{ item.category }} Иначе {{ item.category.title }}
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('game', kwargs={'game_id': self.pk})
 
     class Meta:
         verbose_name = 'Game'
