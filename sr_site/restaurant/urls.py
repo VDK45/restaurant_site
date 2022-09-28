@@ -7,5 +7,6 @@ urlpatterns = [
     path('', index, name='home'),
     path('category/<int:category_id>/', get_category, name='category'),
     path('game/<int:game_id>/', get_game, name='game'),
+    path('menu/<int:menu_id>/', get_menu, name='show_menu'),
 
 ]

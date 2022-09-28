@@ -27,3 +27,7 @@ def get_game(request, game_id):
     game = Games.objects.filter(pk=game_id)
     return render(request, 'restaurant/game.html', {'game': game[0], 'title': game_id})
 
+
+def get_menu(request, menu_id):
+    menu_item = Menu.objects.get(pk=menu_id)
+    return render(request, 'restaurant/view_menu.html', {"menu_item": menu_item})

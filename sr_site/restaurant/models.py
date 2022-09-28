@@ -15,6 +15,9 @@ class Menu(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('show_menu', kwargs={'menu_id': self.pk})
+
     # Для админки
     class Meta:
         verbose_name = 'Menu'

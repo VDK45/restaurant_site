@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ title }}:: {{ block.super }}
+{{ menu_item.title }}:: {{ block.super }}
 {% endblock %}
 
 {% block sidebar %}
@@ -9,10 +9,9 @@
 {% endblock %}
 
 {% block content %}
-{% for item_m in menu %}
 <div class="card mb-3">
     <div class="card-header">
-        Menu: <a href="{{ item_m.get_absolute.url }}">{{ item_m.category }}</a>
+        Menu: <a href="{{ menu_item.get_absolute.url }}">{{ menu_item.category }}</a>
         {# Menu: <a href="{% url 'category' item_m.category.pk %}">{{ item_m.category }}</a> #}
     </div>
     <div class="card-body">
@@ -23,14 +22,13 @@
         {% endif %}
         <div class="media">
             <div class="media-body">
-                <h5 class="card-title">{{ item_m.name }}</h5>
-                <p class="card-text">{{ item_m.description|linebreaks|truncatewords:50 }}</p>
-                <p class="card-text">Gia: {{ item_m.price }} Dong</p>
-                <a href="{{ item_m.get_absolute_url }}" class="btn btn-primary">Order</a>
+                <h5 class="card-title">{{ menu_item.name }}</h5>
+                <p class="card-text">{{ menu_item.description|linebreaks }}</p>
+                <p class="card-text">Gia: {{ menu_item.price }} Dong</p>
+                <a href="#" class="btn btn-primary">Order</a>
             </div>
         </div>
     </div>
-    <div class="card-footer text-muted">Tu {{ item_m.updated_at|date:"d-M-Y" }}</div>
+    <div class="card-footer text-muted">Tu {{ menu_item.updated_at|date:"d-M-Y" }}</div>
 </div>
-{% endfor %}
 {% endblock %}
