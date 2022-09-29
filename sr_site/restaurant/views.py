@@ -9,7 +9,7 @@ def index(request):
     # categories = Category.objects.all()
     # menu = Menu.objects.order_by('-created_at')  # Sort by new if not sorty in Meta
     context = {
-        'title': 'Menu',  # tittle (index.html)
+        'title': 'Trang chu',  # tittle (index.html)
         'menu': menu,  # body (index.html)
     }
     return render(request, template_name='restaurant/index.html', context=context)
