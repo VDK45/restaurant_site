@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ category.title }}
+{{ game.name }}
 {% endblock %}
 
 {% block sidebar %}
@@ -22,7 +22,7 @@
             <div class="media">
                 <div class="media-body">
                     <h5 class="card-title">{{ game.name }}</h5>
-                    <p class="card-text">{{ game.about_game }}</p>
+                    <p class="card-text">{{ game.about_game |linebreaks }}</p>
                     <a href="#" class="btn btn-primary">Order</a>
                 </div>
             </div>

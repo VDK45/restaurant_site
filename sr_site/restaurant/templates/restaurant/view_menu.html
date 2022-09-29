@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ menu_item.title }}:: {{ block.super }}
+Mon: {{ menu_item.name }}
 {% endblock %}
 
 {% block sidebar %}
@@ -15,8 +15,8 @@
         {# Menu: <a href="{% url 'category' item_m.category.pk %}">{{ item_m.category }}</a> #}
     </div>
     <div class="card-body">
-        {% if item_m.photo %}
-        <img src="{{ item_m.photo.url }}" alt="" width="320" class="mr-3">
+        {% if menu_item.photo %}
+        <img src="{{ menu_item.photo.url }}" alt="" width="320" class="mr-3">
         {% else %}
         <img src="https://api.lorem.space/image/movie?w=150&h=220" alt="" class="mr-3">   <!-- ##### -->
         {% endif %}

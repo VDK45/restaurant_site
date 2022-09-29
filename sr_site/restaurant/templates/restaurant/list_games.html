@@ -1,5 +1,5 @@
 <div class="list-group">
-    {{arg1}}
+    <h3>{{arg1}}</h3>
     {% for item_g in games %}
     <a href="{{ item_g.get_absolute_url }}" class="list-group-item list-group-item-action">{{ item_g.name }}</a>
 <!--    <a href="{% url 'game' item_g.pk %}" class="list-group-item list-group-item-action">{{ item_g.name }}</a>-->
