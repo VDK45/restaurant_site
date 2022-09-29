@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 
@@ -6,7 +6,7 @@ from .models import *
 # Create your views here.
 def index(request):
     menu = Menu.objects.all()  #
-    # categories = Category.objects.all()
+    categories = Category.objects.all()
     # menu = Menu.objects.order_by('-created_at')  # Sort by new if not sorty in Meta
     context = {
         'title': 'Trang chu',  # tittle (index.html)
@@ -18,16 +18,19 @@ def index(request):
 def get_category(request, category_id):
     menu = Menu.objects.filter(category_id=category_id)
     # categories = Category.objects.all()
-    category = Category.objects.get(pk=category_id)
+    # category = Category.objects.get(pk=category_id)
+    category = get_object_or_404(Category, pk=category_id)
     return render(request, 'restaurant/category.html',
                   {'menu': menu, 'category': category, 'title': 'Menu'})
 
 
 def get_game(request, game_id):
-    game = Games.objects.get(pk=game_id)
+    # game = Games.objects.get(pk=game_id)
+    game = get_object_or_404(Games, pk=game_id)
     return render(request, 'restaurant/game.html', {'game': game})
 
 
 def get_menu(request, menu_id):
-    menu_item = Menu.objects.get(pk=menu_id)
+    # menu_item = Menu.objects.get(pk=menu_id)
+    menu_item = get_object_or_404(Menu, pk=menu_id)
     return render(request, 'restaurant/view_menu.html', {"menu_item": menu_item})

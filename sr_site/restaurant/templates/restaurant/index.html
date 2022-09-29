@@ -12,8 +12,7 @@
 {% for item_m in menu %}
 <div class="card mb-3">
     <div class="card-header">
-        Menu: <a href="{{ item_m.get_absolute.url }}">{{ item_m.category }}</a>
-        {# Menu: <a href="{% url 'category' item_m.category.pk %}">{{ item_m.category }}</a> #}
+        Menu: <a href="{% url 'category' item_m.category.pk %}">{{ item_m.category }}</a>
     </div>
     <div class="card-body">
         {% if item_m.photo %}
