@@ -11,8 +11,7 @@ Mon: {{ menu_item.name }}
 {% block content %}
 <div class="card mb-3">
     <div class="card-header">
-        Menu: <a href="{{ menu_item.get_absolute.url }}">{{ menu_item.category }}</a>
-        {# Menu: <a href="{% url 'category' item_m.category.pk %}">{{ item_m.category }}</a> #}
+        Menu: <a href="{% url 'category' menu_item.category.pk %}">{{ menu_item.category }}</a>
     </div>
     <div class="card-body">
         {% if menu_item.photo %}
@@ -25,7 +24,7 @@ Mon: {{ menu_item.name }}
                 <h5 class="card-title">{{ menu_item.name }}</h5>
                 <p class="card-text">{{ menu_item.description|linebreaks }}</p>
                 <p class="card-text">Gia: {{ menu_item.price }} Dong</p>
-                <a href="#" class="btn btn-primary">Order</a>
+                <a href="#" class="btn btn-primary">Mua online</a>
             </div>
         </div>
     </div>
