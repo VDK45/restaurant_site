@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import *
+from .forms import *
 
 
 # Create your views here.
@@ -34,3 +35,11 @@ def get_menu(request, menu_id):
     # menu_item = Menu.objects.get(pk=menu_id)
     menu_item = get_object_or_404(Menu, pk=menu_id)
     return render(request, 'restaurant/view_menu.html', {"menu_item": menu_item})
+
+
+def add_menu(request):
+    if request.method == 'POST':
+        pass
+    else:
+        form = MenuForms()
+    return render(request, 'restaurant/add_menu.html', {'form': form})

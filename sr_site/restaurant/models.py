@@ -27,7 +27,7 @@ class Menu(models.Model):
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=255, db_index=True, verbose_name='Ten game')  # Index field
+    title = models.CharField(max_length=255, db_index=True, verbose_name='Ten menu')  # Index field in Admin panel
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Ngay doi')
 
