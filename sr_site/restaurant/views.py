@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import *
@@ -39,7 +39,11 @@ def get_menu(request, menu_id):
 
 def add_menu(request):
     if request.method == 'POST':
-        pass
+        form = MenuForms(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            new_menu = Menu.objects.create(**form.cleaned_data)  # распаковка
+            return redirect(new_menu)
     else:
         form = MenuForms()
     return render(request, 'restaurant/add_menu.html', {'form': form})

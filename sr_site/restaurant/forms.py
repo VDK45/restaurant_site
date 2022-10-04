@@ -11,9 +11,8 @@ class MenuForms(forms.Form):
     price = forms.IntegerField(label='Giá', widget=forms.NumberInput(attrs={
         "class": "form-control"
     }))
-    is_published = forms.BooleanField(label='Hiện menu', initial=True, widget=forms.NullBooleanSelect(attrs={
-        "class": "form-control"
-    }))
+    is_published = forms.BooleanField(label='Hiện menu', initial=True)
+
     category = forms.ModelChoiceField(queryset=Category.objects.all(), label='Loại menu',
                                       empty_label='Chọn loại menu: ', widget=forms.Select(attrs={
             "class": "form-control"
