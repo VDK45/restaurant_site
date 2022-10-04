@@ -42,7 +42,8 @@ def add_menu(request):
         form = MenuForms(request.POST)
         if form.is_valid():
             print(form.cleaned_data)
-            new_menu = Menu.objects.create(**form.cleaned_data)  # распаковка
+            # new_menu = Menu.objects.create(**form.cleaned_data)  # распаковка  # Формы не связаны с models
+            new_menu = form.save()  # Формы связаны с models
             return redirect(new_menu)
     else:
         form = MenuForms()

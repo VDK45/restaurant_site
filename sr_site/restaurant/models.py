@@ -10,7 +10,7 @@ class Menu(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Ngay doi')
     is_published = models.BooleanField(default=True, verbose_name='Hien/Dau')  # Default = none
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Loai menu')
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Loai menu')
 
     def __str__(self):
         return self.name

@@ -1,8 +1,8 @@
 from django import forms
-from .models import Category
+from .models import *
 
-
-class MenuForms(forms.Form):
+'''
+class MenuForms(forms.Form):  # Формы не связаны с models
     name = forms.CharField(max_length=255, label='Tên menu', widget=forms.TextInput(attrs={"class": "form-control"}))
     description = forms.CharField(label='Giới thiệu về menu', required=False, widget=forms.Textarea(attrs={
         "class": "form-control",
@@ -17,6 +17,23 @@ class MenuForms(forms.Form):
                                       empty_label='Chọn loại menu: ', widget=forms.Select(attrs={
             "class": "form-control"
         }))  # queryset обязательный
+'''
+
+
+class MenuForms(forms.ModelForm):
+    class Meta:
+        model = Menu
+        # fields = '__all__'
+        fields = ['name', 'description', 'price', 'photo', 'is_published', 'category']
+        widgets = {
+            'name': forms.TextInput(attrs={"class": "form-control"}),
+            'description': forms.Textarea(attrs={"class": "form-control", "rows": 5}),
+            'price': forms.NumberInput(attrs={"class": "form-control"}),
+            'category': forms.Select(attrs={"class": "form-control"}),
+            'photo': forms.FileInput(attrs={"class": "form-control"}),
+            'is_published': forms.NullBooleanSelect(attrs={"class": "form-control"}),
+        }
+
 
 
 
