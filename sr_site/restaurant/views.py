@@ -2,9 +2,25 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import *
+from django.views.generic import ListView
 
 
 # Create your views here.
+class HomeMenu(ListView):
+    model = Menu   # file  menu_list.html
+    template_name = 'restaurant/home_menu_list.html'  # custom file home_menu_list.html
+    context_object_name = 'all_menu'
+    # extra_context = {'title': 'Trang chu'}  # for static data only
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Trang chu'
+        return context
+
+    def get_queryset(self):
+        return Menu.objects.filter(is_published=True)   # Show is_published only
+
+
 def index(request):
     menu = Menu.objects.all()  #
     categories = Category.objects.all()
