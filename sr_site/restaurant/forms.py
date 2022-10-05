@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 from django.core.exceptions import ValidationError
+import re
 
 '''
 class MenuForms(forms.Form):  # Формы не связаны с models
@@ -34,6 +35,12 @@ class MenuForms(forms.ModelForm):
             'photo': forms.FileInput(attrs={"class": "form-control"}),
             'is_published': forms.NullBooleanSelect(attrs={"class": "form-control"}),
         }
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if re.match(r'\d', name):
+            raise ValidationError('Ten khong the bat dau tu chu duoc')
+        return name
 
     def clean_price(self):
         price = self.cleaned_data['price']
