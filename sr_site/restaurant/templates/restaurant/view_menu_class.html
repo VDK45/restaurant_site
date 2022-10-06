@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Mon: {{ menu.name }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'include/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="card mb-3">
+    <div class="card-header">
+        Menu: <a href="{% url 'category' menu.category.pk %}">{{ menu.category }}</a>
+    </div>
+    <div class="card-body">
+        {% if menu.photo %}
+        <img src="{{ menu.photo.url }}" alt="" width="320" class="mr-3">
+        {% else %}
+        <img src="https://api.lorem.space/image/movie?w=150&h=220" alt="" class="mr-3">   <!-- ##### -->
+        {% endif %}
+        <div class="media">
+            <div class="media-body">
+                <h5 class="card-title">{{ menu.name }}</h5>
+                <p class="card-text">{{ menu.description|linebreaks }}</p>
+                <p class="card-text">Gia: {{ menu.price }} Dong</p>
+                <a href="#" class="btn btn-primary">Mua online</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">Tu {{ menu.updated_at|date:"d-M-Y" }}</div>
+</div>
+{% endblock %}

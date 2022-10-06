@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import *
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 # Create your views here.
@@ -47,25 +47,39 @@ class CategoryMenu(ListView):
 #     return render(request, template_name='restaurant/index.html', context=context)
 
 
-def get_category(request, category_id):
-    menu = Menu.objects.filter(category_id=category_id)
-    # categories = Category.objects.all()
-    # category = Category.objects.get(pk=category_id)
-    category = get_object_or_404(Category, pk=category_id)
-    return render(request, 'restaurant/category.html',
-                  {'menu': menu, 'category': category, 'title': 'Menu'})
+# def get_category(request, category_id):
+#     menu = Menu.objects.filter(category_id=category_id)
+#     # categories = Category.objects.all()
+#     # category = Category.objects.get(pk=category_id)
+#     category = get_object_or_404(Category, pk=category_id)
+#     return render(request, 'restaurant/category.html',
+#                   {'menu': menu, 'category': category, 'title': 'Menu'})
 
 
-def get_game(request, game_id):
-    # game = Games.objects.get(pk=game_id)
-    game = get_object_or_404(Games, pk=game_id)
-    return render(request, 'restaurant/game.html', {'game': game})
+class ViewGame(DetailView):
+    model = Games
+    template_name = 'restaurant/view_game_class.html'  # custom file home_menu_list.html
+    pk_url_kwarg = 'game_id'
+    context_object_name = 'game'
 
 
-def get_menu(request, menu_id):
-    # menu_item = Menu.objects.get(pk=menu_id)
-    menu_item = get_object_or_404(Menu, pk=menu_id)
-    return render(request, 'restaurant/view_menu.html', {"menu_item": menu_item})
+# def view_game(request, game_id):
+#     # game = Games.objects.get(pk=game_id)
+#     game = get_object_or_404(Games, pk=game_id)
+#     return render(request, 'restaurant/game.html', {'game': game})
+
+
+class ViewMenu(DetailView):
+    model = Menu
+    template_name = 'restaurant/view_menu_class.html'  # custom file home_menu_list.html
+    pk_url_kwarg = 'pk'  # 'pk' Вместо 'menu_id'
+    context_object_name = 'menu'
+
+
+# def view_menu(request, menu_id):
+#     # menu_item = Menu.objects.get(pk=menu_id)
+#     menu_item = get_object_or_404(Menu, pk=menu_id)
+#     return render(request, 'restaurant/view_menu.html', {"menu_item": menu_item})
 
 
 def add_menu(request):
