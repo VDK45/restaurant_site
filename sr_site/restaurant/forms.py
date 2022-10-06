@@ -49,5 +49,3 @@ class MenuForms(forms.ModelForm):
         return price
 
 
-
-

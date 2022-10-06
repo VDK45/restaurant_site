@@ -12,7 +12,7 @@ class HomeMenu(ListView):
     context_object_name = 'all_menu'
     # extra_context = {'title': 'Trang chu'}  # for static data only
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs):  # для контекстов
         context = super().get_context_data(**kwargs)
         context['title'] = 'Trang chu'
         return context
@@ -21,15 +21,30 @@ class HomeMenu(ListView):
         return Menu.objects.filter(is_published=True)   # Show is_published only
 
 
-def index(request):
-    menu = Menu.objects.all()  #
-    categories = Category.objects.all()
-    # menu = Menu.objects.order_by('-created_at')  # Sort by new if not sorty in Meta
-    context = {
-        'title': 'Trang chu',  # tittle (index.html)
-        'menu': menu,  # body (index.html)
-    }
-    return render(request, template_name='restaurant/index.html', context=context)
+class CategoryMenu(ListView):
+    model = Menu
+    template_name = 'restaurant/home_category_list.html'  # custom file home_menu_list.html
+    context_object_name = 'category_menu'
+    allow_empty = False  # Не показывать несушествующие категории
+
+    def get_context_data(self, *, object_list=None, **kwargs):  # для контекстов
+        context = super().get_context_data(**kwargs)
+        context['title'] = Category.objects.get(pk=self.kwargs['category_id'])
+        return context
+
+    def get_queryset(self):
+        return Menu.objects.filter(is_published=True, category_id=self.kwargs['category_id'])   # Show is_published only
+
+
+# def index(request):
+#     menu = Menu.objects.all()  #
+#     categories = Category.objects.all()
+#     # menu = Menu.objects.order_by('-created_at')  # Sort by new if not sorty in Meta
+#     context = {
+#         'title': 'Trang chu',  # tittle (index.html)
+#         'menu': menu,  # body (index.html)
+#     }
+#     return render(request, template_name='restaurant/index.html', context=context)
 
 
 def get_category(request, category_id):
