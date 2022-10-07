@@ -13,6 +13,7 @@ urlpatterns = [
     path('game/<int:game_id>/', ViewGame.as_view(), name='game'),
     # path('menu/<int:menu_id>/', view_menu, name='show_menu'),
     path('menu/<int:pk>/', ViewMenu.as_view(), name='show_menu'),
-    path('add_menu/', add_menu, name='add_menu'),
+    # path('add_menu/', add_menu, name='add_menu'),
+    path('add_menu/', AddMenu.as_view(), name='add_menu'),
 
 ]

@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import *
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -82,14 +83,21 @@ class ViewMenu(DetailView):
 #     return render(request, 'restaurant/view_menu.html', {"menu_item": menu_item})
 
 
-def add_menu(request):
-    if request.method == 'POST':
-        form = MenuForms(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-            # new_menu = Menu.objects.create(**form.cleaned_data)  # распаковка  # Формы не связаны с models
-            new_menu = form.save()  # Формы связаны с models
-            return redirect(new_menu)
-    else:
-        form = MenuForms()
-    return render(request, 'restaurant/add_menu.html', {'form': form})
+class AddMenu(CreateView):
+    form_class = MenuForms
+    template_name = 'restaurant/add_menu_class.html'
+    context_object_name = 'form'
+    # success_url = reverse_lazy('home')  # if get_absolute_url not exist
+
+
+# def add_menu(request):
+#     if request.method == 'POST':
+#         form = MenuForms(request.POST)
+#         if form.is_valid():
+#             print(form.cleaned_data)
+#             # new_menu = Menu.objects.create(**form.cleaned_data)  # распаковка  # Формы не связаны с models
+#             new_menu = form.save()  # Формы связаны с models
+#             return redirect(new_menu)
+#     else:
+#         form = MenuForms()
+#     return render(request, 'restaurant/add_menu.html', {'form': form})
