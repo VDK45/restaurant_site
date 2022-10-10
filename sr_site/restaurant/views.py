@@ -101,3 +101,8 @@ class AddMenu(CreateView):
 #     else:
 #         form = MenuForms()
 #     return render(request, 'restaurant/add_menu.html', {'form': form})
+
+
+class SearchResultsView(ListView):
+    model = Menu
+    template_name = 'search_results.html'
