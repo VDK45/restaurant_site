@@ -15,5 +15,5 @@ urlpatterns = [
     path('menu/<int:pk>/', ViewMenu.as_view(), name='show_menu'),
     # path('add_menu/', add_menu, name='add_menu'),
     path('add_menu/', AddMenu.as_view(), name='add_menu'),
-
+    path('search/', SearchResultsView.as_view(), name='search_results'),
 ]
