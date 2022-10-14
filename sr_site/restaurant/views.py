@@ -20,7 +20,7 @@ class HomeMenu(ListView):
         return context
 
     def get_queryset(self):
-        return Menu.objects.filter(is_published=True)   # Show is_published only
+        return Menu.objects.filter(is_published=True).select_related('category')
 
 
 class CategoryMenu(ListView):
@@ -35,7 +35,7 @@ class CategoryMenu(ListView):
         return context
 
     def get_queryset(self):
-        return Menu.objects.filter(is_published=True, category_id=self.kwargs['category_id'])   # Show is_published only
+        return Menu.objects.filter(is_published=True, category_id=self.kwargs['category_id']).select_related('category')
 
 
 # def index(request):
