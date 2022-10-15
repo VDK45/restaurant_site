@@ -5,25 +5,29 @@ from django.urls import reverse_lazy
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import Q
+from .utils import *
+from django.contrib.auth.mixins import LoginRequiredMixin  # for login users only
 
 
 # Create your views here.
-class HomeMenu(ListView):
+class HomeMenu(MyMixin, ListView):
     model = Menu   # file  menu_list.html
     template_name = 'restaurant/home_menu_list.html'  # custom file home_menu_list.html
     context_object_name = 'all_menu'
+    mixin_prop = ''
     # extra_context = {'title': 'Trang chu'}  # for static data only
 
     def get_context_data(self, *, object_list=None, **kwargs):  # для контекстов
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Trang chu'
+        context['title'] = self.get_upper('trang chu')
+        context['mixin_prop'] = self.get_prop()
         return context
 
     def get_queryset(self):
         return Menu.objects.filter(is_published=True).select_related('category')
 
 
-class CategoryMenu(ListView):
+class CategoryMenu(MyMixin, ListView):
     model = Menu
     template_name = 'restaurant/home_category_list.html'  # custom file home_menu_list.html
     context_object_name = 'category_menu'
@@ -31,7 +35,7 @@ class CategoryMenu(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):  # для контекстов
         context = super().get_context_data(**kwargs)
-        context['title'] = Category.objects.get(pk=self.kwargs['category_id'])
+        context['title'] = self.get_upper(Category.objects.get(pk=self.kwargs['category_id']))
         return context
 
     def get_queryset(self):
@@ -84,11 +88,13 @@ class ViewMenu(DetailView):
 #     return render(request, 'restaurant/view_menu.html', {"menu_item": menu_item})
 
 
-class AddMenu(CreateView):
+class AddMenu(LoginRequiredMixin, CreateView):
     form_class = MenuForms
     template_name = 'restaurant/add_menu_class.html'
     context_object_name = 'form'
     # success_url = reverse_lazy('home')  # if get_absolute_url not exist
+    # raise_exception = True  # Если не авторизован то ERROR 403
+    login_url = '/admin/'  # Если не авторизован то к странице Админ
 
 
 # def add_menu(request):
