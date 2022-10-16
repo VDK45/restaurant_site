@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import *
+from django.urls import reverse_lazy
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView
-from django.urls import reverse_lazy
+from django.db.models import Q
 
 
 # Create your views here.
@@ -19,7 +20,7 @@ class HomeMenu(ListView):
         return context
 
     def get_queryset(self):
-        return Menu.objects.filter(is_published=True)   # Show is_published only
+        return Menu.objects.filter(is_published=True).select_related('category')   # .select_related('category') жадный
 
 
 class CategoryMenu(ListView):
@@ -27,6 +28,7 @@ class CategoryMenu(ListView):
     template_name = 'restaurant/home_category_list.html'  # custom file home_menu_list.html
     context_object_name = 'category_menu'
     allow_empty = False  # Не показывать несушествующие категории
+    queryset = Menu.objects.select_related('category')
 
     def get_context_data(self, *, object_list=None, **kwargs):  # для контекстов
         context = super().get_context_data(**kwargs)
@@ -34,7 +36,7 @@ class CategoryMenu(ListView):
         return context
 
     def get_queryset(self):
-        return Menu.objects.filter(is_published=True, category_id=self.kwargs['category_id'])   # Show is_published only
+        return Menu.objects.filter(is_published=True, category_id=self.kwargs['category_id'])  # .select_related('category')    # Show is_published only
 
 
 # def index(request):
@@ -105,4 +107,14 @@ class AddMenu(CreateView):
 
 class SearchResultsView(ListView):
     model = Menu
-    template_name = 'search_results.html'
+    # template_name = 'restaurant/add_menu_class.html'
+    template_name = 'restaurant/search_results.html'
+    queryset = Menu.objects.filter(name__icontains='la')
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Menu.objects.filter(
+            Q(name__icontains=query) | Q(description__icontains=query)
+        )
+        return object_list
+
