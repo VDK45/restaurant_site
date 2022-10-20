@@ -16,6 +16,7 @@ class HomeMenu(MyMixin, ListView):
     context_object_name = 'all_menu'
     mixin_prop = ''
     # extra_context = {'title': 'Trang chu'}  # for static data only
+    paginate_by = 2
 
     def get_context_data(self, *, object_list=None, **kwargs):  # для контекстов
         context = super().get_context_data(**kwargs)
@@ -32,6 +33,7 @@ class CategoryMenu(MyMixin, ListView):
     template_name = 'restaurant/home_category_list.html'  # custom file home_menu_list.html
     context_object_name = 'category_menu'
     allow_empty = False  # Не показывать несушествующие категории
+    paginate_by = 2
 
     def get_context_data(self, *, object_list=None, **kwargs):  # для контекстов
         context = super().get_context_data(**kwargs)
@@ -115,6 +117,7 @@ class SearchResultsView(ListView):
     # template_name = 'restaurant/add_menu_class.html'
     template_name = 'restaurant/search_results.html'
     queryset = Menu.objects.filter(name__icontains='la')
+    paginate_by = 2
 
     def get_queryset(self):
         query = self.request.GET.get('q')
