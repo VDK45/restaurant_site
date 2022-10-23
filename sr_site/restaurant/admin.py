@@ -8,12 +8,12 @@ from django.utils.safestring import mark_safe
 
 class MenuAdmin(admin.ModelAdmin):
     list_display = ('id', 'category', 'name', 'price', 'updated_at', 'is_published', 'get_photo')
-    list_display_links = ('id', 'category', 'name', 'price', 'updated_at')
+    list_display_links = ('id', 'name', 'price')
     search_fields = ('name', 'price')
     list_editable = ('is_published',)
     list_filter = ('is_published', 'category')
     fields = ('category', 'description', 'name', 'price', 'photo', 'get_photo', 'updated_at', 'is_published')
-    readonly_fields = ('updated_at', 'is_published', 'get_photo')
+    readonly_fields = ('updated_at', 'get_photo')
     save_on_top = True
 
     def get_photo(self, obj):
