@@ -13,7 +13,8 @@ def get_categories():
 @register.inclusion_tag('restaurant/list_categories.html')
 def show_categories(arg1, arg2):
     # categories = Category.objects.all()
-    categories = Category.objects.annotate(cnt=Count('menu')).filter(cnt__gt=0)  # show category have 1 more menu
+    # categories = Category.objects.annotate(cnt=Count('menu')).filter(cnt__gt=0)  # show category have 1 more menu
+    categories = Category.objects.annotate(cnt=Count('menu', filter=F('menu__is_published'))).filter(cnt__gt=0)  # show category have 1 more menu
     return {"categories": categories, 'arg1': arg1, 'arg2': arg2}
 
 
