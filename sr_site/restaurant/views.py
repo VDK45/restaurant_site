@@ -7,6 +7,8 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import Q
 from .utils import *
 from django.contrib.auth.mixins import LoginRequiredMixin  # for login users only
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -125,4 +127,24 @@ class SearchResultsView(ListView):
             Q(name__icontains=query) | Q(description__icontains=query)
         )
         return object_list
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cảm ơn bạn đã đăng ký!')
+            return redirect('login')
+        else:
+            messages.error(request, 'Xin bạn làm ơn chỉnh lại phần đăng ký!')
+
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'restaurant/register.html', {"form": form})
+
+
+def login(request):
+    return render(request, 'restaurant/login.html')
 
