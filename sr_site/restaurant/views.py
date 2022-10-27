@@ -7,7 +7,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import Q
 from .utils import *
 from django.contrib.auth.mixins import LoginRequiredMixin  # for login users only
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
 
@@ -131,7 +131,8 @@ class SearchResultsView(ListView):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        # form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Cảm ơn bạn đã đăng ký!')
@@ -140,7 +141,7 @@ def register(request):
             messages.error(request, 'Xin bạn làm ơn chỉnh lại phần đăng ký!')
 
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
 
     return render(request, 'restaurant/register.html', {"form": form})
 
