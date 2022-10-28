@@ -9,6 +9,13 @@
 {% endblock %}
 
 {% block content %}
-<h1>Nhập vào</h1>
+<h1>Đăng nhập</h1>
+
+<form  method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+     <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+</form>
 
 {% endblock %}

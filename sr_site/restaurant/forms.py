@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 from django.core.exceptions import ValidationError
 import re
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 '''
@@ -73,4 +73,7 @@ class UserRegisterForm(UserCreationForm):
         '''
 
 
+class UserLoginForm(AuthenticationForm):
+    username = forms.CharField(label='Tên đăng nhập', widget=forms.TextInput(attrs={"class": "form-control"}))
+    password = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput(attrs={"class": "form-control"}))
 
