@@ -1,12 +1,22 @@
 from django.contrib import admin
 from .models import *
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django import forms
 
 # Register your models here.
 # Добавить свое приложение в админку
 
 
+class MenuAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Menu
+
+
 class MenuAdmin(admin.ModelAdmin):
+    form = MenuAdminForm
     list_display = ('id', 'category', 'name', 'price', 'updated_at', 'is_published', 'get_photo')
     list_display_links = ('id', 'name', 'price')
     search_fields = ('name', 'price')

@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'restaurant.apps.RestaurantConfig',  # Путь к приложению
     "debug_toolbar",
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +140,5 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
