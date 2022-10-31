@@ -13,6 +13,7 @@ class MenuAdminForm(forms.ModelForm):
 
     class Meta:
         model = Menu
+        fields = '__all__'
 
 
 class MenuAdmin(admin.ModelAdmin):
