@@ -19,41 +19,46 @@
 </head>
 
 <body>
-<!--Включить файл _navbar.html'-->
+
 {% include 'include/_navbar.html' %}
 
-
 <div class="container mt-4">
-<!--    <h1>-->
-<!--        <a href="{% url 'home' %}">{{ title }}: </a>-->
-<!--        &lt;!&ndash;        {{ categories.count }}&ndash;&gt;-->
-<!--    </h1>-->
+
     <div class="row">
 
         <div class="col-md-3">
             {% block sidebar %}{% endblock %}
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-7">
+
+            {% if messages %}
+
+            {% for message in messages %}
+
+                {% if message.tags == 'error' %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% else %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+
+
+
+            {% endfor %}
+
+            {% endif %}
+
+
+
+            {% include 'include/_pagination.html' %}
+
             {% block content %}{% endblock %}
 
-                <nav aria-label="...">
-                    <ul class="pagination">
-                        <li class="page-item disabled">
-                            <a class="page-link">Previous</a>
-                        </li>
-                        {% for p in page_obj.paginator.page_range %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
-                        {% endfor %}
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="?page={{ p }}">{{p}}</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+            {% include 'include/_pagination.html' %}
 
         </div>
 

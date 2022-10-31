@@ -16,5 +16,7 @@ urlpatterns = [
     # path('add_menu/', add_menu, name='add_menu'),
     path('add_menu/', AddMenu.as_view(), name='add_menu'),
     path('search/', SearchResultsView.as_view(), name='search_results'),
-    path('test/', test, name='test'),
+    path('register/', register, name='register'),
+    path('login/', user_login, name='login'),
+    path('logout/', user_logout, name='logout'),
 ]

@@ -7,7 +7,9 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import Q
 from .utils import *
 from django.contrib.auth.mixins import LoginRequiredMixin  # for login users only
-from django.core.paginator import Paginator
+# from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import login, logout
 
 
 # Create your views here.
@@ -16,8 +18,8 @@ class HomeMenu(MyMixin, ListView):
     template_name = 'restaurant/home_menu_list.html'  # custom file home_menu_list.html
     context_object_name = 'all_menu'
     mixin_prop = ''
-    paginate_by = 2
     # extra_context = {'title': 'Trang chu'}  # for static data only
+    paginate_by = 2
 
     def get_context_data(self, *, object_list=None, **kwargs):  # для контекстов
         context = super().get_context_data(**kwargs)
@@ -34,6 +36,7 @@ class CategoryMenu(MyMixin, ListView):
     template_name = 'restaurant/home_category_list.html'  # custom file home_menu_list.html
     context_object_name = 'category_menu'
     allow_empty = False  # Не показывать несушествующие категории
+    paginate_by = 2
 
     def get_context_data(self, *, object_list=None, **kwargs):  # для контекстов
         context = super().get_context_data(**kwargs)
@@ -117,6 +120,7 @@ class SearchResultsView(ListView):
     # template_name = 'restaurant/add_menu_class.html'
     template_name = 'restaurant/search_results.html'
     queryset = Menu.objects.filter(name__icontains='la')
+    paginate_by = 2
 
     def get_queryset(self):
         query = self.request.GET.get('q')
@@ -126,10 +130,38 @@ class SearchResultsView(ListView):
         return object_list
 
 
-def test(request):
-    objects = ['obj1', 'obj2', 'obj3', 'obj4', 'obj5',  'obj6', 'obj7', 'obj8', 'obj9']
-    paginator = Paginator(objects, 2)
-    page_num = request.GET.get('page', 1)
-    page_objects = paginator.get_page(page_num)
-    return render(request, 'restaurant/test.html', {'page_obj': page_objects})
+def register(request):
+    if request.method == 'POST':
+        # form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Сразу вошел как авторизованый
+            messages.success(request, 'Cảm ơn bạn đã đăng ký!')
+            return redirect('home')
+        else:
+            messages.error(request, 'Xin bạn làm ơn chỉnh lại phần đăng ký!')
+
+    else:
+        form = UserRegisterForm()
+
+    return render(request, 'restaurant/register.html', {"form": form})
+
+
+def user_login(request):
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)  # data= (Обязательно)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserLoginForm()
+
+    return render(request, 'restaurant/login.html', {"form": form})
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('login')
 
