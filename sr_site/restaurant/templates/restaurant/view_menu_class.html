@@ -22,7 +22,7 @@ Mon: {{ menu.name }}
         <div class="media">
             <div class="media-body">
                 <h5 class="card-title">{{ menu.name }}</h5>
-                <p class="card-text">{{ menu.description|linebreaks }}</p>
+                <p class="card-text">{{ menu.description|safe|linebreaks }}</p>
                 <p class="card-text">Gia: {{ menu.price }} Dong</p>
                 <a href="#" class="btn btn-primary">Mua online</a>
             </div>

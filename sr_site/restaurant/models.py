@@ -1,10 +1,12 @@
 from django.db import models
 from django.urls import reverse  # or reverse_lazy
+from ckeditor.fields import RichTextField
 
 
 class Menu(models.Model):
     name = models.CharField(max_length=255, verbose_name='Ten menu')  # Text
     description = models.TextField(blank=True, verbose_name='description')  # Description / Не обязательное
+    # description = RichTextField(blank=True, verbose_name='description')  # Description / Не обязательное
     price = models.IntegerField(verbose_name='Gia')  # Price
     photo = models.ImageField(blank=True, upload_to='photos/%y/%m/%d', verbose_name='photo')  # Photo
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created')
