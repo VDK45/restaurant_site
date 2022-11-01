@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 import re
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from captcha.fields import CaptchaField, CaptchaTextInput
 
 '''
 class MenuForms(forms.Form):  # Формы не связаны с models
@@ -51,16 +52,21 @@ class MenuForms(forms.ModelForm):
         return price
 
 
+# class CustomCaptchaTextInput(CaptchaTextInput):
+#     template_name = 'custom_field.html'
+
+
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(label='Tên đăng nhập', widget=forms.TextInput(attrs={"class": "form-control"}))
     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={"class": "form-control"}))
     password1 = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput(attrs={"class": "form-control"}))
     password2 = forms.CharField(label='Xác nhận mật khẩu', widget=forms.PasswordInput(attrs={"class": "form-control"}),
                                 help_text='Xin bạn hãy dùng mật khẩu trên 8 ký tự!')
+    captcha = CaptchaField()
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2', 'captcha')
         '''
         # Not working
         widgets = {

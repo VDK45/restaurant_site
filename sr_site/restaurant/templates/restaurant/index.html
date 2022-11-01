@@ -24,7 +24,7 @@
             <div class="media-body">
                 <h5 class="card-title">{{ item_m.name }}</h5>
                 <p class="card-text">{{ item_m.description|safe|linebreaks|truncatewords:50 }}</p>
-                <p class="card-text">Gia: {{ item_m.price }} Dong</p>
+                <p class="card-text">Gia: {{ item_m.price }}Đồng</p>
                 <a href="{{ item_m.get_absolute_url }}" class="btn btn-primary">Xem</a>
             </div>
         </div>
