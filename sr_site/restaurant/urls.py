@@ -1,11 +1,12 @@
 # Основной файл url
 from django.urls import path
 from .views import *
+from django.views.decorators.cache import cache_page
 
 
 urlpatterns = [
     # path('', index, name='home'),  # func index from views
-    path('', HomeMenu.as_view(), name='home'),  # class HomeMenu from views
+    path('', cache_page(600)(HomeMenu.as_view()), name='home'),  # class HomeMenu from views
     # path('category/<int:category_id>/', get_category, name='category'),
     # path('category/<int:category_id>/', CategoryMenu.as_view(extra_context={'title': 'title'}), name='category'),
     path('category/<int:category_id>/', CategoryMenu.as_view(), name='category'),
@@ -19,4 +20,5 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
+
 ]
