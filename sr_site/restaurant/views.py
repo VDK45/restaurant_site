@@ -119,14 +119,14 @@ class SearchResultsView(ListView):
     model = Menu
     # template_name = 'restaurant/add_menu_class.html'
     template_name = 'restaurant/search_results.html'
-    queryset = Menu.objects.filter(name__icontains='la')
-    paginate_by = 2
+    # queryset = Menu.objects.filter(name__icontains='la')
+    # paginate_by = 2
 
     def get_queryset(self):
         query = self.request.GET.get('q')
         object_list = Menu.objects.filter(
             Q(name__icontains=query) | Q(description__icontains=query)
-        )
+        )[:4]
         return object_list
 
 
