@@ -1,4 +1,10 @@
-pip install django
-pip install Pillow
-pip install django-debug-toolbar
-pip install django-simple-captcha
+pip install django==4.1.1
+pip install Pillow==9.2.0
+pip install django-debug-toolbar==3.7.0
+pip install django-ckeditor==6.5.1
+pip install django-simple-captcha==0.5.17
+pip install django-js-asset==2.0.0
+pip install django-ranged-response==0.2.0
+pip install sqlparse==0.4.2
+pip install tzdata==2022.2
+pip install asgiref==3.5.2
