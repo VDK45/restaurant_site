@@ -36,12 +36,19 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
     'restaurant.apps.RestaurantConfig',  # Путь к приложению
     "debug_toolbar",
     'ckeditor',
     'ckeditor_uploader',
     'captcha',
+
+    # django-allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +79,38 @@ TEMPLATES = [
         },
     },
 ]
+
+# django-allauth
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+    # Google
+    # 'social_core.backends.google.GooglePlusAuth',
+]
+
+SITE_ID = 1
+
+# # Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online'
+        }
+
+    }
+}
+
+
+# end django-allauth
 
 WSGI_APPLICATION = 'sr_site.wsgi.application'
 
@@ -219,3 +258,4 @@ CACHES = {
         'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
     }
 }
+

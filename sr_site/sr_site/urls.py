@@ -17,6 +17,7 @@ from django.conf import settings   # # import 1
 from django.conf.urls.static import static   # # import 2
 from django.contrib import admin
 from django.urls import path, include
+# from django.conf.urls import include  # for django-allauth????
 
 # from sr_site import settings
 
@@ -26,6 +27,7 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('captcha/', include('captcha.urls')),
+    path('accounts/', include('allauth.urls')),
 
 ]
 
