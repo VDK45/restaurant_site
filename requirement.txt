@@ -8,4 +8,5 @@ pip install django-ranged-response==0.2.0
 pip install sqlparse==0.4.2
 pip install tzdata==2022.2
 pip install asgiref==3.5.2
-pip install django-allauth
+pip install django-allauth==0.51.0
+

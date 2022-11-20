@@ -23,8 +23,8 @@ class Menu(models.Model):
 
     # Для админки
     class Meta:
-        verbose_name = 'Menu'
-        verbose_name_plural = 'All menu'
+        verbose_name = 'Thực đơn'
+        verbose_name_plural = 'Tất cả thực đơn'
         # ordering = ['-created_at', 'price']
         ordering = ['-price']    # Влияет на админку и на сайт
 
@@ -42,8 +42,8 @@ class Category(models.Model):
         return reverse('category', kwargs={'category_id': self.pk})
 
     class Meta:
-        verbose_name = 'Loai menu'
-        verbose_name_plural = 'All loai menu'
+        verbose_name = 'Loại đồ ăn'
+        verbose_name_plural = 'Tât cả các loại đồ ăn'
         ordering = ['-title']  # Sort by -title
 
 
@@ -67,11 +67,11 @@ class Games(models.Model):
 
 
 class Posts(models.Model):
-    title = models.CharField(max_length=255, verbose_name='De tai')
-    content = models.TextField(max_length=2000, blank=True, help_text='', null=True, verbose_name='van ban')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Ngay gi')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Ngay doi')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255, help_text='Không quuá 250 ký tự', verbose_name='Đề tài')
+    content = models.TextField(max_length=2000, blank=True, help_text='Không quuá 2000 ký tự', null=True, verbose_name='van ban')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Ngày gi')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Ngày đổi')
 
     def __str__(self):
         return self.title
@@ -80,5 +80,5 @@ class Posts(models.Model):
         return reverse('post', kwargs={'pk': self.pk})
 
     class Meta:
-        verbose_name = 'Binh luan'
-        verbose_name_plural = 'Tat ca Binh luan'
+        verbose_name = 'Bình luan'
+        verbose_name_plural = 'Tat ca Bình luan'

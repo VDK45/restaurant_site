@@ -58,9 +58,9 @@ admin.site.register(Games, ListGames)
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'content', 'updated_at')
-    list_display_links = ('id', 'title', 'content', 'updated_at')
-    search_fields = ('title',)
+    list_display = ('id', 'title', 'content', 'author', 'updated_at')
+    list_display_links = ('id', 'title', 'content', 'author', 'updated_at')
+    search_fields = ('author', 'title',)
 
 
 admin.site.register(Posts, PostAdmin)
