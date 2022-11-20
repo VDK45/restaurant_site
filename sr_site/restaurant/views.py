@@ -47,6 +47,21 @@ class CategoryMenu(MyMixin, ListView):
         return Menu.objects.filter(is_published=True, category_id=self.kwargs['category_id']).select_related('category')
 
 
+class SearchResultsView(ListView):
+    model = Menu
+    # template_name = 'restaurant/add_menu_class.html'
+    template_name = 'restaurant/SearchResultsView.html'
+    # queryset = Menu.objects.filter(name__icontains='la')
+    # paginate_by = 5
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Menu.objects.filter(
+            Q(name__icontains=query) | Q(description__icontains=query)
+        )[:4]
+        return object_list
+
+
 # def index(request):
 #     menu = Menu.objects.all()  #
 #     categories = Category.objects.all()
@@ -113,21 +128,6 @@ class AddMenu(LoginRequiredMixin, CreateView):
 #     else:
 #         form = MenuForms()
 #     return render(request, 'restaurant/add_menu.html', {'form': form})
-
-
-class SearchResultsView(ListView):
-    model = Menu
-    # template_name = 'restaurant/add_menu_class.html'
-    template_name = 'restaurant/search_results.html'
-    # queryset = Menu.objects.filter(name__icontains='la')
-    # paginate_by = 2
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = Menu.objects.filter(
-            Q(name__icontains=query) | Q(description__icontains=query)
-        )[:4]
-        return object_list
 
 
 def register(request):

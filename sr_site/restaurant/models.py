@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse  # or reverse_lazy
 from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
 
 
 class Menu(models.Model):
@@ -64,3 +65,20 @@ class Games(models.Model):
         verbose_name_plural = 'Games'
         ordering = ['name']  # Sort by -name
 
+
+class Posts(models.Model):
+    title = models.CharField(max_length=255, verbose_name='De tai')
+    content = models.TextField(max_length=2000, blank=True, help_text='', null=True, verbose_name='van ban')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Ngay gi')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Ngay doi')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('post', kwargs={'pk': self.pk})
+
+    class Meta:
+        verbose_name = 'Binh luan'
+        verbose_name_plural = 'Tat ca Binh luan'
