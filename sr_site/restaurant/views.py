@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin  # for login users onl
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.views.generic.edit import FormMixin
 
 
 # Create your views here.
@@ -95,11 +96,33 @@ class ViewGame(DetailView):
 #     return render(request, 'restaurant/game.html', {'game': game})
 
 
-class ViewMenu(DetailView):
+class ViewMenu(FormMixin, DetailView):
     model = Menu
     template_name = 'restaurant/view_menu_class.html'  # custom file home_menu_list.html
     pk_url_kwarg = 'pk'  # 'pk' Вместо 'menu_id'
     context_object_name = 'menu'
+    # Comments
+    form_class = CommentForm
+
+    # def get_success_url(self, **kwargs):
+    #     return reverse_lazy('menu', kwargs={'pk': self.get_object().id})
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.menu = self.get_object()
+        self.object.author = self.request.user
+        self.object.save()
+        return redirect('home')
+        # return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):  # Переопределить post
+        # print('post')
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
 
 
 # def view_menu(request, menu_id):

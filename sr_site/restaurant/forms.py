@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import Textarea
 from .models import *
 from django.core.exceptions import ValidationError
 import re
@@ -82,4 +83,19 @@ class UserRegisterForm(UserCreationForm):
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(label='Tên đăng nhập', widget=forms.TextInput(attrs={"class": "form-control"}))
     password = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput(attrs={"class": "form-control"}))
+
+
+class CommentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
+        self.fields['text'].widget = Textarea(attrs={'rows': 5})  # Form 5 dỏng
+
+    class Meta:
+        model = Comments
+        fields = ('text',)
+
+
+
 

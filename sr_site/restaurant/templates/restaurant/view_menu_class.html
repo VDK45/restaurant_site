@@ -30,4 +30,16 @@ Mon: {{ menu.name }}
     </div>
     <div class="card-footer text-muted">Tu {{ menu.updated_at|date:"d-M-Y" }}</div>
 </div>
+
+<hr>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form action="" id="add_comment" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-block">Them comment</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
