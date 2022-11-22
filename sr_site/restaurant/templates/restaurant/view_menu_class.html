@@ -32,6 +32,24 @@ Mon: {{ menu.name }}
 </div>
 
 <hr>
+<div class="card mb-3">
+    <div class="card-header">
+        {{ menu.comments_menu.all.count }} Góp ý: <a >{{ menu.name }}</a>
+    </div>
+
+    <div class="card-body">
+        <ul>
+        {% for comment in menu.comments_menu.all %}
+        <li>
+        {{ comment.created_at }}
+        {{ comment.author }}
+        {{ comment.text |safe |linebreaks  }}
+        </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+</div>
 
 <div class="card mb-3">
     {% if request.user.is_authenticated %}

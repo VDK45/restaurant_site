@@ -89,7 +89,7 @@ class Comments(models.Model):
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE, verbose_name='Đồ ăn', blank=True, null=True,
                              related_name='comments_menu')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Người viết', blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Ngày tạo ra')
-    text = models.TextField(max_length=2000, blank=True, null=True,
+    created_at = models.DateTimeField(auto_now=True, verbose_name='Ngày tạo ra')
+    text = models.TextField(max_length=2000, blank=True, help_text='Không quuá 2000 ký tự', null=True,
                             verbose_name='Comment')
     status = models.BooleanField(verbose_name='Hiện/dấu', default=False)

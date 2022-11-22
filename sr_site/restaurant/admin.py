@@ -57,12 +57,19 @@ class ListGames(admin.ModelAdmin):
 admin.site.register(Games, ListGames)
 
 
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'content', 'author', 'updated_at')
-    list_display_links = ('id', 'title', 'content', 'author', 'updated_at')
-    search_fields = ('author', 'title',)
+# class PostAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'title', 'content', 'author', 'updated_at')
+#     list_display_links = ('id', 'title', 'content', 'author', 'updated_at')
+#     search_fields = ('author', 'title',)
+#
+#
+# admin.site.register(Posts, PostAdmin)
 
 
-admin.site.register(Posts, PostAdmin)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('menu', 'author', 'created_at', 'status')
+    list_display_links = ('menu', 'author', 'created_at', 'status')
+    search_fields = ('menu', )
 
 
+admin.site.register(Comments, CommentAdmin)

@@ -125,7 +125,7 @@ class ViewMenu(FormMixin, DetailView):
         # return super().form_valid(form)
 
     def form_invalid(self, form):
-        return redirect('home')
+        return redirect('error')
 
     def post(self, request, *args, **kwargs):  # Переопределить post
         # print('post')
@@ -198,4 +198,9 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+
+def error_page(request):
+    return render(request, 'restaurant/error.html')
+
 
