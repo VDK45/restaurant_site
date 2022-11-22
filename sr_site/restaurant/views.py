@@ -96,6 +96,15 @@ class ViewGame(DetailView):
 #     return render(request, 'restaurant/game.html', {'game': game})
 
 
+class CommentAdded(LoginRequiredMixin, CreateView):
+    form_class = MenuForms
+    template_name = 'restaurant/comment_added.html'
+    context_object_name = 'form'
+    # success_url = reverse_lazy('home')  # if get_absolute_url not exist
+    # raise_exception = True  # Если не авторизован то ERROR 403
+    # login_url = '/admin/'  # Если не авторизован то к странице Админ
+
+
 class ViewMenu(FormMixin, DetailView):
     model = Menu
     template_name = 'restaurant/view_menu_class.html'  # custom file home_menu_list.html
@@ -112,8 +121,11 @@ class ViewMenu(FormMixin, DetailView):
         self.object.menu = self.get_object()
         self.object.author = self.request.user
         self.object.save()
-        return redirect('home')
+        return redirect('comment')
         # return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return redirect('home')
 
     def post(self, request, *args, **kwargs):  # Переопределить post
         # print('post')
@@ -122,7 +134,6 @@ class ViewMenu(FormMixin, DetailView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-
 
 
 # def view_menu(request, menu_id):

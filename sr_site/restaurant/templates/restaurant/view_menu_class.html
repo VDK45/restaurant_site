@@ -34,6 +34,7 @@ Mon: {{ menu.name }}
 <hr>
 
 <div class="card mb-3">
+    {% if request.user.is_authenticated %}
     <div class="card-body">
         <form action="" id="add_comment" method="post">
             {% csrf_token %}
@@ -41,5 +42,11 @@ Mon: {{ menu.name }}
             <button type="submit" class="btn btn-primary btn-block">Them comment</button>
         </form>
     </div>
+    {% else %}
+    <div class="card-body">
+        <h5>Xin bạn login để comment!</h5>
+    </div>
+    {% endif %}
+
 </div>
 {% endblock %}
