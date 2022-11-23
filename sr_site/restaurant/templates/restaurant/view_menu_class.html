@@ -40,11 +40,14 @@ Mon: {{ menu.name }}
     <div class="card-body">
         <ul>
         {% for comment in menu.comments_menu.all %}
-        <li>
-        {{ comment.created_at }}
-        {{ comment.author }}
-        {{ comment.text |safe |linebreaks  }}
-        </li>
+            {% if comment.status == True %}
+                <li>
+                {{ comment.created_at }}
+                {{ comment.author }}
+                {{ comment.text |safe |linebreaks  }}
+                </li>
+            {% else %}
+            {% endif %}
         {% endfor %}
         </ul>
     </div>
@@ -62,7 +65,7 @@ Mon: {{ menu.name }}
     </div>
     {% else %}
     <div class="card-body">
-        <h5>Xin bạn login để comment!</h5>
+        <h5>Xin quý vị đăng nhập để góp ý!</h5>
     </div>
     {% endif %}
 

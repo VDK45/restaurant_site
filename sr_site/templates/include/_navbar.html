@@ -43,7 +43,7 @@
         </div>
             {% if request.user.is_authenticated %}
                 <span class="navbar-text">
-                    <a> Rất vui được gặp lại bạn {{ user.username }}! |</a> <a href="{% url 'logout' %}">Thoát</a>
+                    <a>{{ user.username }} |</a> <a href="{% url 'logout' %}">Thoát</a>
                 </span>
             {% else %}
                 <span class="navbar-text">
