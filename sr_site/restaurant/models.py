@@ -100,3 +100,8 @@ class Comments(models.Model):
                                                               '<li>Không quá 2000 ký tự.</li>')
     status = models.BooleanField(verbose_name='Hiện/dấu', default=False)
     # objects = StatusCommentFilter()
+
+    class Meta:
+        verbose_name = 'Góp ý'
+        verbose_name_plural = 'Góp ý'
+        ordering = ['status']
