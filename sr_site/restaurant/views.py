@@ -170,7 +170,7 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Сразу вошел как авторизованый
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')  # Сразу вошел как авторизованый
             messages.success(request, 'Cảm ơn bạn đã đăng ký!')
             return redirect('home')
         else:
