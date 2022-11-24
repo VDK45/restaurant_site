@@ -14,11 +14,11 @@
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}
+<p>
     Vui lòng đăng nhập bằng một trong các tài khoản hiện có của bạn.<br>
-    Hoặc <a href="{{ signup_url }}">đăng ký mới</a>
+    Hoặc <a href="{% url 'register' %}">đăng ký mới</a>
 <!--    for a {{ site_name }} -->
-    và đăng nhập tài khoản bên dưới:{% endblocktrans %}</p>
+    và đăng nhập tài khoản bên dưới:</p>
 
 <div class="socialaccount_ballot">
 
@@ -26,7 +26,7 @@
         {% include "socialaccount/snippets/provider_list.html" with process="login" %}
     </ul>
 
-    <div class="login-or">{% trans 'or' %}</div>
+    <div class="login-or">{% trans 'Hoặc:' %}</div><br>
 
 </div>
 
