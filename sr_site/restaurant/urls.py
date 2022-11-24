@@ -22,6 +22,6 @@ urlpatterns = [
     path('logout/', user_logout, name='logout'),
     path('comment/', CommentAdded.as_view(), name='comment'),
     path('error/', error_page, name='error'),
-
+    path('accounts/login/', account_user_login, name='account_login'),
 
 ]

@@ -97,5 +97,7 @@ class CommentForm(forms.ModelForm):
         fields = ('text',)
 
 
-
+class AccountsUserLogin(AuthenticationForm):
+    username = forms.CharField(label='Tên đăng nhập', widget=forms.TextInput(attrs={"class": "form-control"}))
+    password = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput(attrs={"class": "form-control"}))
 
