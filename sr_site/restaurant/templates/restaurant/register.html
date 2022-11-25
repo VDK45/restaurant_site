@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+{% load account socialaccount %}
+
+
 {% block title %}
     Đăng ký mới:: {{ block.super }}
 {% endblock %}
@@ -9,6 +13,28 @@
 {% endblock %}
 
 {% block content %}
+{% get_providers as socialaccount_providers %}
+{% if socialaccount_providers %}
+<p>
+    Vui lòng đăng nhập bằng một trong các tài khoản trên các mạng xã hội hiện có của bạn:<br></p>
+
+<div class="socialaccount_ballot">
+
+    <ul class="socialaccount_providers">
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+    </ul>
+
+    <div class="login-or">{% trans 'Hoặc:' %}</div><br>
+
+</div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+<p>{% blocktrans %}If you have not created an account yet, then please
+    <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+{% endif %}
+
 <h1>Đăng ký mới</h1>
 
 <form  method="post">

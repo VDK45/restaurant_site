@@ -210,7 +210,7 @@ def account_user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('login')
+    return redirect('account_login')
 
 
 def error_page(request):
