@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)=wg1$wup2qyi9axv%ih&*27&(_e-eb5(mq=31dt#b78$2er*z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,8 @@ TEMPLATES = [
 ]
 
 # django-allauth
-
+# 929601427814-mtqup9v6kgjknpdgskupfio5ai79hpj8.apps.googleusercontent.com
+# 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
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
@@ -95,6 +97,18 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 
 
 # # Provider specific settings
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online'
+#         }
+#
+#     }
+# }
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -102,9 +116,9 @@ SOCIALACCOUNT_PROVIDERS = {
             'email',
         ],
         'AUTH_PARAMS': {
-            'access_type': 'online'
-        }
-
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
     }
 }
 
