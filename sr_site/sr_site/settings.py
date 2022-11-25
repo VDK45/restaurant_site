@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -273,3 +275,6 @@ CACHES = {
     }
 }
 
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'uni_form'
+# end django-crispy-forms

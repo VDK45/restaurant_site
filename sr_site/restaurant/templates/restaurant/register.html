@@ -15,6 +15,7 @@
 {% block content %}
 {% get_providers as socialaccount_providers %}
 {% if socialaccount_providers %}
+{% load crispy_forms_filters %}
 <p>
     Vui lòng đăng nhập bằng một trong các tài khoản trên các mạng xã hội hiện có của bạn:<br></p>
 
@@ -40,8 +41,10 @@
 <form  method="post">
     {% csrf_token %}
     {{ form.as_p }}
-
-     <button type="submit" class="btn btn-primary btn-block">Đăng ký mới</button>
+    <div class="d-grid">
+         <button class="primaryAction mt-3 btn btn-dark" type="submit">{% trans "Đăng ký mới" %}</button><br>
+    </div>
+<!--     <button type="submit" class="btn btn-primary btn-block">Đăng ký mới</button>-->
 
 </form>
 
