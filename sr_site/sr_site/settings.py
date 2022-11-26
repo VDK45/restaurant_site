@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)=wg1$wup2qyi9axv%ih&*27&(_e-eb5(mq=31dt#b78$2er*z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost',]
 
 
 # Application definition
@@ -192,9 +192,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 INTERNAL_IPS = [
-    # ...
     "127.0.0.1",
-    # ...
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -276,5 +274,5 @@ CACHES = {
 }
 
 # django-crispy-forms
-CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # end django-crispy-forms

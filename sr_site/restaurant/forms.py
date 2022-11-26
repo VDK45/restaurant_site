@@ -80,11 +80,6 @@ class UserRegisterForm(UserCreationForm):
         '''
 
 
-class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(label='Tên đăng nhập', widget=forms.TextInput(attrs={"class": "form-control"}))
-    password = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput(attrs={"class": "form-control"}))
-
-
 class CommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -97,7 +92,11 @@ class CommentForm(forms.ModelForm):
         fields = ('text',)
 
 
-class AccountsUserLogin(AuthenticationForm):
+class UserLoginForm(AuthenticationForm):
     username = forms.CharField(label='Tên đăng nhập', widget=forms.TextInput(attrs={"class": "form-control"}))
     password = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput(attrs={"class": "form-control"}))
 
+
+class AccountsUserLogin(forms.Form):
+    username = forms.CharField(label='Tên đăng nhập', widget=forms.TextInput(attrs={"class": "form-control"}))
+    password = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput(attrs={"class": "form-control"}))
