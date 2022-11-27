@@ -86,6 +86,10 @@ TEMPLATES = [
 # django-allauth
 # 929601427814-mtqup9v6kgjknpdgskupfio5ai79hpj8.apps.googleusercontent.com
 # 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
+
+# 1293973104721181
+# ab4dbd348ac88b2756f1ec83e4a211ed
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
