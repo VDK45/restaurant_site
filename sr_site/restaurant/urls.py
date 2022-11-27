@@ -18,10 +18,10 @@ urlpatterns = [
     path('add_menu/', AddMenu.as_view(), name='add_menu'),
     path('search/', SearchResultsView.as_view(), name='search_results'),
     path('register/', register, name='register'),
-    path('login/', user_login, name='login'),
+    # path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
     path('comment/', CommentAdded.as_view(), name='comment'),
     path('error/', error_page, name='error'),
-    path('accounts/login/', account_user_login, name='account_login'),
+    # path('accounts/login/', account_user_login, name='account_login'),
 
 ]

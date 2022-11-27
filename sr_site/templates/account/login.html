@@ -1,4 +1,4 @@
-{% extends "account/base.html" %}
+{% extends 'base.html' %}
 
 {% load i18n %}
 {% load account socialaccount %}
@@ -7,10 +7,17 @@
 
 {% load static %}
 
+{% block title %}
+    Nhập vào:
+{% endblock %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block sidebar %}
+{% include 'include/_sidebar.html' %}
+{% endblock %}
+
 
 {% block content %}
+
 
   <div class="text-center">
     <h1>{% trans "Sign In" %}</h1>
@@ -28,7 +35,7 @@
         {% include "socialaccount/snippets/provider_list.html" with process="login" %}
       </div>
 
-      <div class="login-or border-top border-bottom my-3">{% trans 'OR' %}</div>
+      <div class="login-or border-top border-bottom my-3">{% trans 'Hoặc' %}</div>
 
     </div>
 
@@ -54,4 +61,5 @@
         </form>
     </div>
   </div>
+
 {% endblock %}

@@ -197,13 +197,13 @@ def user_login(request):
 
 def account_user_login(request):
     if request.method == 'POST':
-        form = AccountsUserLogin(data=request.POST)  # data= (Обязательно)
+        form = UserLoginForm(data=request.POST)  # data= (Обязательно)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             return redirect('home')
     else:
-        form = AccountsUserLogin()
+        form = UserLoginForm()
 
     return render(request, 'account/login.html', {"form": form})
 
