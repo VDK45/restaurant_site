@@ -33,7 +33,8 @@
         <div class="col-md-3">
             {% load cache %}
             {% cache 30 sidebar %}
-            {% block sidebar %}{% endblock %}
+            {# {% block sidebar %}{% endblock %} #} {# Some time not work!!! #}
+            {% include 'include/_sidebar.html' %}
             {% endcache %}
         </div>
 
